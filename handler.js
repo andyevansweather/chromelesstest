@@ -1,4 +1,17 @@
 'use strict';
+const { Chromeless } = require('chromeless');
+
+function dostuff() {
+  const chromeless = new Chromeless();
+
+  return chromeless
+    .goto('https://www.google.com')
+    .type('chromeless', 'input[name="q"]')
+    .press(13)
+    .wait('#resultStats')
+    .screenshot()
+    .end()
+}
 
 module.exports.hello = (event, context, callback) => {
   const response = {
@@ -8,6 +21,8 @@ module.exports.hello = (event, context, callback) => {
       input: event,
     }),
   };
+
+  dostuff();
 
   callback(null, response);
 
